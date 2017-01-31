@@ -5,10 +5,10 @@
 
   // 2) What are the four rules that govern what the 'this keyword' is bound to and describe each?
 
-      // explicit binding (via .bind())  a new function is defined using an existing function, and a static "this" is bound to it
-      // implicit binding (via .call())  call is a function that operates on another function, calling it while passing the first argument as "this", and the remaining arguments to match the parent function
-      // implicit binding (via .apply())  like for .call(), but the arguments are passed as a single array
-      // default binding, whatever is in scope, which can be the global domain
+      // explicit binding to a function via .call() or .apply()
+      // implicit to the new Object within an object's constructor 
+      // implicit within a function called by dotting an object in code
+      // default binding, which is the window, or whatever is in global scope
 
   // 3) What is the difference between call and apply?
 
