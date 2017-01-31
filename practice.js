@@ -1,19 +1,22 @@
 //We're in a job interview. Answer the following questions (try to not look at your notes unless you have to).
   // 1) What is the purpose of the 'this keyword'?
 
-      //Answer
+      // 'this' allows access to an object that "owns" a piece of code such as a function
 
   // 2) What are the four rules that govern what the 'this keyword' is bound to and describe each?
 
-      //Answer
+      // explicit binding (via .bind())  a new function is defined using an existing function, and a static "this" is bound to it
+      // implicit binding (via .call())  call is a function that operates on another function, calling it while passing the first argument as "this", and the remaining arguments to match the parent function
+      // implicit binding (via .apply())  like for .call(), but the arguments are passed as a single array
+      // default binding, whatever is in scope, which can be the global domain
 
   // 3) What is the difference between call and apply?
 
-      //Answer
+      // call takes a list of arguments following the "this" binding, where apply takes in the arguments in an array
 
   // 4) What does .bind do?
 
-      //Answer
+      //  it returns a copy of a function with the "this" explicitly set in the first arg of .bind()
 
 
 //Next Problem
@@ -25,8 +28,16 @@
 
     //Code Here
 
-//Now, invoke the getUsername method and verify you got the username of the object and not anything else.
+var user = {
+  username: "boing",
+  email: "tingly@magic.net",
+  getUsername: function() {
+    return this.username;
+  }
+};
 
+//Now, invoke the getUsername method and verify you got the username of the object and not anything else.
+user.getUsername();
 
 //Next Problem
 
@@ -34,6 +45,17 @@
 // Write the function definitions which will make the following function invocations function properly.
 
   //Function Invocations Here
+
+function Car(make, model, year) {
+  var newCar = {
+    make: make,
+    model: model,
+    year: year,
+    move: 0,
+    moveCar: function() {return (this.move += 10);}
+  };
+  return newCar;
+}
 
 var prius = new Car('Toyota', 'Prius', 2011);
 var mustang = new Car('Ford', 'Mustang', 2013);
@@ -55,7 +77,8 @@ var getYear = function(){
 
 //Note(no tests)
   //Code Here
-
+getYear.call(prius);
+getYear.call(mustang);
 
 //New Problem
 
@@ -69,14 +92,15 @@ var getMyUsername = function() {
  return this.username;
 };
 
-var userName = getMyUsername(); //Fix this
+var userName = getMyUsername.call(myUser); //Fix this
 
 //Above you're given an object, and  a function. What will the getUsername function return?
 //Note(no tests)
-  //Answer Here
+  
+  // 'undefined'
 
 //In the example above, what is the 'this keyword' bound to when getUsername runs?
 
-  //Answer Here
+  //The top object (window)
 
 //Fix the getMyUsername invocation so that userName will be equal to 'iliketurtles'.
